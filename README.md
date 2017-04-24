@@ -1,6 +1,6 @@
-# The Purpose of using Markdown syntax
+# The Purpose of java-exercises repository
 
-## Markdown is used to style text on the web.  The following can be used for styling purposes:
+## This is a platform for the use to practice **_Java Exercises_**.  The following can be used for styling:
 
 ####
 1. It can be used for **bolding** characters
