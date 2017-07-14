@@ -1,14 +1,15 @@
 package com.nayema;
 
-import java.util.Scanner;
-
 public class Product {
+    String name;
     double price;
-    final double tax = 1.15; //15% sales tax
+    final double TAX_RATE = 0.15; //15% sales tax
 
-    public void taxAmount() {
-        Scanner scanner = new Scanner(System.in);
-        double productPrice = scanner.nextInt();
-        price = productPrice * tax;
+    public double taxAmount() {
+        return price * TAX_RATE;
+    }
+
+    public double totalAmount() {
+        return price + taxAmount();
     }
 }

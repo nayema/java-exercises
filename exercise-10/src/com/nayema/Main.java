@@ -1,22 +1,22 @@
 package com.nayema;
 
-import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        Scanner userInput = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+        Product product = new Product();
 
         System.out.println("What is the product name?");
-        String productName = userInput.nextLine();
+        product.name = scanner.nextLine();
 
         System.out.println("What is the product price?");
+        product.price = scanner.nextDouble();
 
-        Product product = new Product();
-        product.taxAmount();
-        DecimalFormat twoD = new DecimalFormat("0.00");
-        double finalPrice = product.price;
-        System.out.println("The " + productName + " costs a total of $" + twoD.format(finalPrice));
+        product.totalAmount();
+        NumberFormat currency = NumberFormat.getCurrencyInstance();
+        System.out.println("The " + product.name + " costs a total of " + currency.format(product.totalAmount()));
     }
 }
