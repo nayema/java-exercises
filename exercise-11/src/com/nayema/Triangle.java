@@ -1,20 +1,54 @@
 package com.nayema;
 
-public class Triangle {
-    double s;
-    double lengthA, lengthB, lengthC;
-    double area;
-    Point point = new Point();
+import java.util.ArrayList;
 
-    public String lengthsOfSides() {
-        lengthA = Math.sqrt(Math.pow(point.getX2()- point.getX1(),2) + (Math.pow(point.getY2()-point.getY1(),2)));
-        lengthB = Math.sqrt(Math.pow(point.getX3()-point.getX2(),2) + (Math.pow(point.getY3()-point.getY2(),2)));
-        lengthC = Math.sqrt((Math.pow(lengthA,2)) + (Math.pow(lengthB,2)));
-        return "Length of sides: " + lengthA + ", " + lengthB + ", " + lengthC;
+public class Triangle {
+    Point a;
+    Point b;
+    Point c;
+    double lengthAB;
+    double lengthBC;
+    double lengthAC;
+
+    public Triangle(Point a, Point b, Point c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
     }
-    public String area() {
-        s = (lengthA + lengthB + lengthC)/2;
-        area = Math.sqrt(s*(s-lengthA)*(s-lengthB)*(s-lengthC));
-        return "Area: " + area;
+
+    public ArrayList<Double> calculateLengthsOfSides() {
+        lengthAB = distance(a, b);
+        lengthBC = distance(b, c);
+        lengthAC = distance(a, c);
+
+        ArrayList<Double> lengths = new ArrayList<Double>(3);
+        lengths.add(lengthAB);
+        lengths.add(lengthBC);
+        lengths.add(lengthAC);
+        return lengths;
+    }
+
+    public ArrayList<Double> calculateAngles() {
+        double angleA = angle(lengthBC, lengthAC, lengthAB);
+        double angleB = angle(lengthAC, lengthAB, lengthBC);
+        double angleC = 180 - (angleA + angleB);
+
+        ArrayList<Double> areas = new ArrayList<Double>(3);
+        areas.add(angleA);
+        areas.add(angleB);
+        areas.add(angleC);
+        return areas;
+    }
+
+    public double calculateArea() {
+        return 0.5 * ((b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y));
+    }
+
+    private double distance(Point starting, Point ending) {
+        return Math.sqrt(Math.pow(ending.x - starting.x, 2) + Math.pow(ending.y - starting.y, 2));
+    }
+
+    private double angle(double a, double b, double c) {
+        return Math.acos((Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2)) / (2 * a * b));
     }
 }
