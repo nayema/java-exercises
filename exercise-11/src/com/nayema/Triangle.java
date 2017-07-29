@@ -6,9 +6,6 @@ public class Triangle {
     Point a;
     Point b;
     Point c;
-    double lengthAB;
-    double lengthBC;
-    double lengthAC;
 
     public Triangle(Point a, Point b, Point c) {
         this.a = a;
@@ -17,9 +14,9 @@ public class Triangle {
     }
 
     public ArrayList<Double> calculateLengthsOfSides() {
-        lengthAB = distance(a, b);
-        lengthBC = distance(b, c);
-        lengthAC = distance(a, c);
+        double lengthAB = distance(a, b);
+        double lengthBC = distance(b, c);
+        double lengthAC = distance(a, c);
 
         ArrayList<Double> lengths = new ArrayList<Double>(3);
         lengths.add(lengthAB);
@@ -29,15 +26,19 @@ public class Triangle {
     }
 
     public ArrayList<Double> calculateAngles() {
+        double lengthAB = distance(a, b);
+        double lengthBC = distance(b, c);
+        double lengthAC = distance(a, c);
+
         double angleA = angle(lengthBC, lengthAC, lengthAB);
         double angleB = angle(lengthAC, lengthAB, lengthBC);
         double angleC = 180 - (angleA + angleB);
 
-        ArrayList<Double> areas = new ArrayList<Double>(3);
-        areas.add(angleA);
-        areas.add(angleB);
-        areas.add(angleC);
-        return areas;
+        ArrayList<Double> angles = new ArrayList<Double>(3);
+        angles.add(angleA);
+        angles.add(angleB);
+        angles.add(angleC);
+        return angles;
     }
 
     public double calculateArea() {
