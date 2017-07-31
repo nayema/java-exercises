@@ -4,18 +4,18 @@ import java.util.Scanner;
 
 public class App {
     public void calculateDistance() {
-        double xA = coordinatePrompt("x", "a");
-        double yA = coordinatePrompt("y", "a");
-        double zA = coordinatePrompt("z", "a");
-        double xB = coordinatePrompt("x", "b");
-        double yB = coordinatePrompt("y", "b");
-        double zB = coordinatePrompt("z", "b");
-
-        Point pointA = new Point(xA, yA, zA);
-        Point pointB = new Point(xB, yB, zB);
+        Point pointA = pointPrompt("a");
+        Point pointB = pointPrompt("b");
 
         double distanceAB = distance(pointA, pointB);
         System.out.println("Distance: " + distanceAB);
+    }
+
+    private Point pointPrompt(String pointName) {
+        double x = coordinatePrompt("x", pointName);
+        double y = coordinatePrompt("y", pointName);
+        double z = coordinatePrompt("z", pointName);
+        return new Point(x, y, z);
     }
 
     private double coordinatePrompt(String coordinate, String point) {
