@@ -5,23 +5,17 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        Vehicle car1 = new Car();
-        Vehicle car2 = new Car();
-        Vehicle car3 = new Car();
-        Vehicle truck1 = new Truck();
-        Vehicle truck2 = new Truck();
-        Vehicle truck3 = new Truck();
+        ArrayList<VehicleEntry> vehicleEntries = new ArrayList<>();
+        vehicleEntries.add(new VehicleEntry("Foo", new Car()));
+        vehicleEntries.add(new VehicleEntry("Bar", new Truck()));
+        vehicleEntries.add(new VehicleEntry("Bazz", new Bike()));
+        vehicleEntries.add(new VehicleEntry("Alpha", new Tricycle()));
 
-        ArrayList<Vehicle> vehicles = new ArrayList<>();
-        vehicles.add(car1);
-        vehicles.add(car2);
-        vehicles.add(car3);
-        vehicles.add(truck1);
-        vehicles.add(truck2);
-        vehicles.add(truck3);
-
-        for (int i = 0; i < vehicles.size(); i++) {
-            System.out.println("A " + vehicles.get(i).getClass().getSimpleName() + " has " + vehicles.get(i).getNumberOfWheels() + " wheels.");
+        for (int i = 0; i < vehicleEntries.size(); i++) {
+            VehicleEntry vehicleEntry = vehicleEntries.get(i);
+            String vehicleName = vehicleEntry.vehicleName;
+            int numberOfWheels = vehicleEntry.vehicle.getNumberOfWheels();
+            System.out.println(vehicleName + " has " + numberOfWheels + " wheels.");
         }
     }
 }
