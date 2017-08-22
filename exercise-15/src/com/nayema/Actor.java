@@ -1,6 +1,8 @@
 package com.nayema;
 
 public class Actor {
+    public String name;
+
     private static String[] possibleNames = {
             "Arnold Schwarnezeggar",
             "Angelina Jolie",
@@ -30,8 +32,6 @@ public class Actor {
         int random = (int) (Math.random() * length);
         return possibleNames[random];
     }
-
-    String name;
 
     private Actor(String name) {
         this.name = name;
