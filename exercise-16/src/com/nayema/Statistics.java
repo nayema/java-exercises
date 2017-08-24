@@ -29,18 +29,14 @@ public class Statistics {
         size = data.length;
     }
 
-    public void getCalculations() {
-        printCalculations(calculateMean(), calculateMedian(), calculateMode(), calculateStandardDeviation(), calculateVariance());
-    }
-
-    private void printCalculations(double mean, double median, double mode, double standardDev, double variance) {
+    public void printStats() {
         DecimalFormat formatter = new DecimalFormat("0.00");
 
-        System.out.println("Mean: " + formatter.format(mean));
-        System.out.println("Median: " + formatter.format(median));
-        System.out.println("Mode: " + formatter.format(mode));
-        System.out.println("Standard Deviation: " + formatter.format(standardDev));
-        System.out.println("Variance: " + formatter.format(variance));
+        System.out.println("Mean: " + formatter.format(calculateMean()));
+        System.out.println("Median: " + formatter.format(calculateMedian()));
+        System.out.println("Mode: " + formatter.format(calculateMode()));
+        System.out.println("Standard Deviation: " + formatter.format(calculateStandardDeviation()));
+        System.out.println("Variance: " + formatter.format(calculateVariance()));
     }
 
     private double calculateMean() {

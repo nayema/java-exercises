@@ -7,7 +7,7 @@ public class Main {
 
         try {
             stats.setData(args);
-            stats.getCalculations();
+            stats.printStats();
         } catch (InvalidNumberException e) {
             System.out.println(e.errorMessage);
             e.printStackTrace();
