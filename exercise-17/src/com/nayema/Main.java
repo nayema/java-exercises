@@ -2,7 +2,7 @@ package com.nayema;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Error {
         String strategyFlag = args[0];
         ForecastingStrategy strategy;
 
@@ -14,7 +14,7 @@ public class Main {
                 strategy = new MedianBasedStrategy();
                 break;
             default:
-                throw new Exception("Must enter AverageBased or MedianBased");
+                throw new Error("Must enter AverageBased or MedianBased");
         }
 
         WeatherForecaster forecaster = new WeatherForecaster(strategy);

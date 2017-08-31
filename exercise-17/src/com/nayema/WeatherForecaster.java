@@ -1,8 +1,6 @@
 package com.nayema;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 public class WeatherForecaster {
@@ -27,9 +25,9 @@ public class WeatherForecaster {
 
     public void printTemperature() {
 
-        double tomorrowsTemperature = strategy.forecast(data);
-        BigDecimal bigDecimal = new BigDecimal(tomorrowsTemperature);
-        BigDecimal formattedTemperature = bigDecimal.round(new MathContext(2, RoundingMode.UP));
+        double temperature = strategy.forecast(data);
+        DecimalFormat formatter = new DecimalFormat("0.00");
+        String formattedTemperature = formatter.format(temperature);
         System.out.println("Tomorrow's temperature will be " + formattedTemperature + " \u00b0C.");
     }
 
