@@ -18,7 +18,13 @@ public class Main {
         }
 
         WeatherForecaster forecaster = new WeatherForecaster(strategy);
-        forecaster.setTemperatures(args);
+
+        String[] temperatures = new String[args.length - 1];
+        for (int i = 1; i < args.length; i++) {
+            temperatures[i - 1] = args[i];
+        }
+
+        forecaster.setTemperatures(temperatures);
         forecaster.printTemperature();
     }
 }

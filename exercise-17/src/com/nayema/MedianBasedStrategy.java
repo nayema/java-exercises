@@ -1,14 +1,24 @@
 package com.nayema;
 
+import java.util.Arrays;
+
 public class MedianBasedStrategy implements ForecastingStrategy {
     public double forecast(double[] temperatures) {
-        int middle = temperatures.length / 2;
+        Arrays.sort(temperatures);
 
-        for (int i = 0; i < temperatures.length; i++) {
-            if (temperatures.length % 2 == 1) {
-                return temperatures[middle];
-            }
+        double median;
+        int length = temperatures.length;
+
+        if (length % 2 == 0) {
+            int centeredNumber1 = (length - 1) / 2;
+            int centeredNumber2 = length / 2;
+
+            median = (temperatures[centeredNumber1] + temperatures[centeredNumber2]) / 2;
+        } else {
+            int centeredNumber = length / 2;
+
+            median = temperatures[centeredNumber];
         }
-        return (temperatures[middle - 1] + temperatures[middle]) / 2.0;
+        return median;
     }
 }
