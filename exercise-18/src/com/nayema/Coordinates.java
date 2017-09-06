@@ -5,7 +5,6 @@ public class Coordinates {
     public int columnNumber;
 
     public Coordinates findCoordinates(int[][] numbers) {
-
         for (int i = 0; i < numbers.length; i++) {
             for (int j = 0; j < numbers[i].length; j++) {
                 if (numbers[i][j] == 5) {
