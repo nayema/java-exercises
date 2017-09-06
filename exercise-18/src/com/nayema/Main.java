@@ -4,12 +4,28 @@ public class Main {
 
     public static void main(String[] args) {
         int[][] array = {{1, 2, 3, 4, 6}, {3, 3, 1, 2, 1}, {1, 2, 3, 4, 5}};
+        int number = 5;
 
         System.out.println("2D Array: ");
         printArray(array);
 
-        Coordinates coordinates = findCoordinates(array, 5);
-        System.out.println("rowNumber: " + coordinates.rowNumber + " columnNumber: " + coordinates.columnNumber);
+        if (contains(array, number)) {
+            Coordinates coordinates = findCoordinates(array, number);
+            System.out.println("rowNumber: " + coordinates.rowNumber + " columnNumber: " + coordinates.columnNumber);
+        } else {
+            System.out.println("This array does not contain " + number + ".");
+        }
+    }
+
+    public static boolean contains(int[][] numbers, int searchFor) {
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[i].length; j++) {
+                if (numbers[i][j] == searchFor) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static Coordinates findCoordinates(int[][] numbers, int searchFor) {
