@@ -18,7 +18,7 @@ public class WeatherForecaster {
             try {
                 data[i] = Double.parseDouble(temperatures[i]);
             } catch (NumberFormatException e) {
-                throw new InvalidNumberException("Error: " + temperatures[i] + " is not a valid number!");
+                throw new InvalidNumberException(temperatures[i] + " is not a valid number!");
             }
         }
 
