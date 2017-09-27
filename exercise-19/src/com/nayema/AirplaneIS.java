@@ -3,33 +3,62 @@ package com.nayema;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class AirplaneIS {
     private JFrame frame;
     private JPanel mainPanel;
     private JTable table;
+    private ArrayList<Airplane> airplaneList = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         new AirplaneIS().buildAirplaneIS();
     }
 
-    public void buildAirplaneIS() {
-        Object[][] airplaneData = readData();
-        bindDataToTable(airplaneData);
+    public void buildAirplaneIS() throws IOException {
+        populateTable();
         renderUI();
     }
 
-    private Object[][] readData() {
-        AirplaneListHelper airplaneListHelper = new AirplaneListHelper();
-        airplaneListHelper.readFromCSV();
-        return airplaneListHelper.convertDataToTable();
+    private void populateTable() throws IOException {
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+
+        BufferedReader reader = new BufferedReader(new FileReader("data.csv"));
+        String firstLine = reader.readLine();
+        String[] columnNames = firstLine.split(",");
+        tableModel.setColumnIdentifiers(columnNames);
+
+        Object[] dataLines = reader.lines().toArray();
+        for (int i = 0; i < dataLines.length; i++) {
+            String line = dataLines[i].toString();
+            String[] airplaneRow = line.split(",");
+            Airplane airplane = makeAirplane(airplaneRow);
+            airplaneList.add(airplane);
+        }
+        for (int i = 0; i < airplaneList.size(); i++) {
+            Object[] airplaneRowData = getAirplaneData(i);
+            tableModel.addRow(airplaneRowData);
+        }
     }
 
-    private void bindDataToTable(Object[][] airplaneData) {
-        String[] columnNames = {"Model Name", "Seat Capacity", "Next Inspection Date", "Weight"};
-        DefaultTableModel tableModel = new DefaultTableModel(airplaneData, columnNames);
-        table.setModel(tableModel);
-        table.setAutoCreateRowSorter(true);
+    private Airplane makeAirplane(String[] airplaneRow) {
+        String modelName = airplaneRow[0];
+        int seatCapacity = Integer.parseInt(airplaneRow[1]);
+        String nextInspectionDate = airplaneRow[2];
+        int weight = Integer.parseInt(airplaneRow[3]);
+        return new Airplane(modelName, seatCapacity, nextInspectionDate, weight);
+    }
+
+    private Object[] getAirplaneData(int index) {
+        return new Object[]{
+                airplaneList.get(index).getModelName(),
+                airplaneList.get(index).getSeatCapacity(),
+                airplaneList.get(index).getNextInspectionDate(),
+                airplaneList.get(index).getWeight()
+        };
     }
 
     private void renderUI() {
