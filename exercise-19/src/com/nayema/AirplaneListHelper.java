@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class AirplaneListHelper {
     ArrayList<Airplane> airplaneList = new ArrayList<>();
@@ -50,31 +48,5 @@ public class AirplaneListHelper {
             airplaneData[i][3] = airplaneList.get(i).getWeight();
         }
         return airplaneData;
-    }
-
-    public Object[][] convertDataToTable3() {
-        ArrayList<Object[]> data = new ArrayList();
-        for (Airplane airplane : airplaneList) {
-            ArrayList<String> airplaneRow = new ArrayList<>(4);
-            airplaneRow.add(airplane.getModelName());
-            airplaneRow.add(String.valueOf(airplane.getSeatCapacity()));
-            airplaneRow.add(airplane.getNextInspectionDate());
-            airplaneRow.add(String.valueOf(airplane.getWeight()));
-            data.add(airplaneRow.toArray());
-        }
-        return data.toArray();
-    }
-
-    public Object[] convertDataToTable2() {
-        Vector<Vector<String>> data = new Vector();
-        for (Airplane airplane : airplaneList) {
-            Vector<String> airplaneVector = new Vector<>(4);
-            airplaneVector.add(airplane.getModelName());
-            airplaneVector.add(String.valueOf(airplane.getSeatCapacity()));
-            airplaneVector.add(airplane.getNextInspectionDate());
-            airplaneVector.add(String.valueOf(airplane.getWeight()));
-            data.add(airplaneVector);
-        }
-        return data.toArray();
     }
 }

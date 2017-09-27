@@ -3,7 +3,6 @@ package com.nayema;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.Vector;
 
 public class AirplaneIS {
     private JFrame frame;
@@ -15,9 +14,8 @@ public class AirplaneIS {
     }
 
     public void buildAirplaneIS() {
-        Vector<Vector<String>> airplaneData = readData2();
-        //Object[][] airplaneData = readData();
-        bindDataToTable2(airplaneData);
+        Object[][] airplaneData = readData();
+        bindDataToTable(airplaneData);
         renderUI();
     }
 
@@ -27,20 +25,7 @@ public class AirplaneIS {
         return airplaneListHelper.convertDataToTable();
     }
 
-    private Vector<Vector<String>> readData2() {
-        AirplaneListHelper airplaneListHelper = new AirplaneListHelper();
-        airplaneListHelper.readFromCSV();
-        return airplaneListHelper.convertDataToTable2();
-    }
-
     private void bindDataToTable(Object[][] airplaneData) {
-        String[] columnNames = {"Model Name", "Seat Capacity", "Next Inspection Date", "Weight"};
-        DefaultTableModel tableModel = new DefaultTableModel(airplaneData, columnNames);
-        table.setModel(tableModel);
-        table.setAutoCreateRowSorter(true);
-    }
-
-    private void bindDataToTable2(Vector<Vector<String>> airplaneData) {
         String[] columnNames = {"Model Name", "Seat Capacity", "Next Inspection Date", "Weight"};
         DefaultTableModel tableModel = new DefaultTableModel(airplaneData, columnNames);
         table.setModel(tableModel);
