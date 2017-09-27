@@ -44,8 +44,8 @@ public class AirplaneIS {
         tableModel.setColumnIdentifiers(columnNames);
 
         Object[] dataLines = reader.lines().toArray();
-        for (int i = 0; i < dataLines.length; i++) {
-            String line = dataLines[i].toString();
+        for (Object dataLine : dataLines) {
+            String line = dataLine.toString();
             String[] airplaneRow = line.split(",");
             Airplane airplane = makeAirplane(airplaneRow);
             airplaneList.add(airplane);
