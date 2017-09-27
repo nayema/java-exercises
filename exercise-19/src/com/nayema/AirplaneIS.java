@@ -13,16 +13,17 @@ public class AirplaneIS {
     private JPanel mainPanel;
     private JTable table;
     private JPanel editorPanel;
-    private JTextField enterModelNameTextField;
-    private JTextField enterSeatCapacityTextField;
-    private JTextField DDMMMYYYYTextField;
-    private JTextField weightLbsTextField;
+    private JTextField modelNameTextField;
+    private JTextField seatCapacityTextField;
+    private JTextField nextInspectionDateTextField;
+    private JTextField weightTextField;
     private JButton newAirplaneRecordButton;
     private JButton saveRecordButton;
     private JLabel modelNameLabel;
     private JLabel seatCapacityLabel;
     private JLabel nextInspectionDateLabel;
     private JLabel weightLabel;
+    private JScrollPane tableScrollPane;
     private ArrayList<Airplane> airplaneList = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {

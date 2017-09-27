@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <scrollpane id="12839">
+      <scrollpane id="12839" binding="tableScrollPane">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -69,7 +69,7 @@
               <text value="Weight (lbs):"/>
             </properties>
           </component>
-          <component id="384dd" class="javax.swing.JTextField" binding="enterModelNameTextField" default-binding="true">
+          <component id="384dd" class="javax.swing.JTextField" binding="modelNameTextField">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -80,7 +80,7 @@
               <toolTipText value=""/>
             </properties>
           </component>
-          <component id="c9d68" class="javax.swing.JTextField" binding="enterSeatCapacityTextField" default-binding="true">
+          <component id="c9d68" class="javax.swing.JTextField" binding="seatCapacityTextField">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -90,7 +90,7 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="ef8ca" class="javax.swing.JTextField" binding="DDMMMYYYYTextField" default-binding="true">
+          <component id="ef8ca" class="javax.swing.JTextField" binding="nextInspectionDateTextField">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -100,7 +100,7 @@
               <text value="DD-MMM-YYYY"/>
             </properties>
           </component>
-          <component id="bfee6" class="javax.swing.JTextField" binding="weightLbsTextField" default-binding="true">
+          <component id="bfee6" class="javax.swing.JTextField" binding="weightTextField">
             <constraints>
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
