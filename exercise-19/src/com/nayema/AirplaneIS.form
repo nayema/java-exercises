@@ -113,7 +113,7 @@
               <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="New"/>
+              <text value="Add new airplane record"/>
             </properties>
           </component>
           <component id="c275" class="javax.swing.JButton" binding="saveRecordButton">
@@ -121,7 +121,7 @@
               <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Save"/>
+              <text value="Save record"/>
             </properties>
           </component>
         </children>

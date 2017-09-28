@@ -3,15 +3,16 @@ package com.nayema;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.ArrayList;
 
 public class AirplaneIS {
     private JFrame frame;
     private JPanel mainPanel;
     private JTable table;
+    DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
     private JPanel editorPanel;
     private JTextField modelNameTextField;
     private JTextField seatCapacityTextField;
@@ -26,6 +27,21 @@ public class AirplaneIS {
     private JScrollPane tableScrollPane;
     private ArrayList<Airplane> airplaneList = new ArrayList<>();
 
+    public AirplaneIS() {
+        newAirplaneRecordButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] newAirplaneRow = new String[4];
+                newAirplaneRow[0] = modelNameTextField.getText();
+                newAirplaneRow[1] = seatCapacityTextField.getText();
+                newAirplaneRow[2] = nextInspectionDateTextField.getText();
+                newAirplaneRow[3] = weightTextField.getText();
+                Airplane newAirplane = makeAirplane(newAirplaneRow);
+                airplaneList.add(newAirplane);
+            }
+        });
+    }
+
     public static void main(String[] args) throws IOException {
         new AirplaneIS().buildAirplaneIS();
     }
@@ -36,8 +52,6 @@ public class AirplaneIS {
     }
 
     private void populateTable() throws IOException {
-        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-
         BufferedReader reader = new BufferedReader(new FileReader("data.csv"));
         String firstLine = reader.readLine();
         String[] columnNames = firstLine.split(",");
