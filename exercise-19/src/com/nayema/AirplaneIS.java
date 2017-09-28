@@ -5,9 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class AirplaneIS {
@@ -20,12 +18,12 @@ public class AirplaneIS {
     private JTextField nextInspectionDateTextField;
     private JTextField weightTextField;
     private JButton newAirplaneRecordButton;
-    private JButton saveRecordButton;
     private JLabel modelNameLabel;
     private JLabel seatCapacityLabel;
     private JLabel nextInspectionDateLabel;
     private JLabel weightLabel;
     private JScrollPane tableScrollPane;
+    private JButton clearFieldButton;
     private ArrayList<Airplane> airplaneList = new ArrayList<>();
     private DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 
@@ -33,13 +31,52 @@ public class AirplaneIS {
         newAirplaneRecordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[] newAirplaneRow = new String[4];
-                newAirplaneRow[0] = modelNameTextField.getText();
-                newAirplaneRow[1] = seatCapacityTextField.getText();
-                newAirplaneRow[2] = nextInspectionDateTextField.getText();
-                newAirplaneRow[3] = weightTextField.getText();
-                Airplane newAirplane = makeAirplane(newAirplaneRow);
+                String[] newAirplaneData = getNewAirplaneDataFromTextFields();
+                writeToCSVFile(newAirplaneData);
+
+                Object[] newAirplaneRowData = getAirplaneData(airplaneList.size() - 1);
+                tableModel.addRow(newAirplaneRowData);
+                newAirplaneRecordButton.setText("Saved");
+            }
+
+            private String[] getNewAirplaneDataFromTextFields() {
+                String[] newAirplaneData = new String[4];
+                newAirplaneData[0] = modelNameTextField.getText();
+                newAirplaneData[1] = seatCapacityTextField.getText();
+                newAirplaneData[2] = nextInspectionDateTextField.getText();
+                newAirplaneData[3] = weightTextField.getText();
+                Airplane newAirplane = makeAirplane(newAirplaneData);
                 airplaneList.add(newAirplane);
+                return newAirplaneData;
+            }
+
+            private void writeToCSVFile(String[] newAirplaneData) {
+                try (FileWriter fileWriter = new FileWriter("data.csv", true);
+                     BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                     PrintWriter printWriter = new PrintWriter(bufferedWriter)) {
+                    printWriter.println(newAirplaneData[0] + ","
+                            + newAirplaneData[1] + ","
+                            + newAirplaneData[2] + ","
+                            + newAirplaneData[3]);
+                    printWriter.flush();
+                    printWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        clearFieldButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clearTextFields();
+            }
+
+            private void clearTextFields() {
+                newAirplaneRecordButton.setText("Save new airplane record");
+                modelNameTextField.setText(null);
+                seatCapacityTextField.setText(null);
+                nextInspectionDateTextField.setText("DD-MMM-YYYY");
+                weightTextField.setText(null);
             }
         });
     }
