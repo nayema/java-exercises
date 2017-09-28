@@ -5,14 +5,15 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class AirplaneIS {
     private JFrame frame;
     private JPanel mainPanel;
     private JTable table;
-    DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
     private JPanel editorPanel;
     private JTextField modelNameTextField;
     private JTextField seatCapacityTextField;
@@ -26,6 +27,7 @@ public class AirplaneIS {
     private JLabel weightLabel;
     private JScrollPane tableScrollPane;
     private ArrayList<Airplane> airplaneList = new ArrayList<>();
+    private DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 
     public AirplaneIS() {
         newAirplaneRecordButton.addActionListener(new ActionListener() {
