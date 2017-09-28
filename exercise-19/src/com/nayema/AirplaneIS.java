@@ -31,15 +31,12 @@ public class AirplaneIS {
         newAirplaneRecordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[] newAirplaneData = getNewAirplaneDataFromTextFields();
-                writeToCSVFile(newAirplaneData);
-
-                Object[] newAirplaneRowData = getAirplaneData(airplaneList.size() - 1);
-                tableModel.addRow(newAirplaneRowData);
+                getNewAirplaneDataAndWriteToCSV();
+                addNewAirplaneRowToTable();
                 newAirplaneRecordButton.setText("Saved");
             }
 
-            private String[] getNewAirplaneDataFromTextFields() {
+            private void getNewAirplaneDataAndWriteToCSV() {
                 String[] newAirplaneData = new String[4];
                 newAirplaneData[0] = modelNameTextField.getText();
                 newAirplaneData[1] = seatCapacityTextField.getText();
@@ -47,10 +44,7 @@ public class AirplaneIS {
                 newAirplaneData[3] = weightTextField.getText();
                 Airplane newAirplane = makeAirplane(newAirplaneData);
                 airplaneList.add(newAirplane);
-                return newAirplaneData;
-            }
 
-            private void writeToCSVFile(String[] newAirplaneData) {
                 try (FileWriter fileWriter = new FileWriter("data.csv", true);
                      BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
                      PrintWriter printWriter = new PrintWriter(bufferedWriter)) {
@@ -63,6 +57,11 @@ public class AirplaneIS {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+
+            private void addNewAirplaneRowToTable() {
+                Object[] newAirplaneRowData = getAirplaneData(airplaneList.size() - 1);
+                tableModel.addRow(newAirplaneRowData);
             }
         });
         clearFieldButton.addActionListener(new ActionListener() {
