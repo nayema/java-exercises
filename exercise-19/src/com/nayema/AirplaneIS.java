@@ -37,21 +37,16 @@ public class AirplaneIS {
             }
 
             private void getNewAirplaneDataAndWriteToCSV() {
-                String[] newAirplaneData = new String[4];
-                newAirplaneData[0] = modelNameTextField.getText();
-                newAirplaneData[1] = seatCapacityTextField.getText();
-                newAirplaneData[2] = nextInspectionDateTextField.getText();
-                newAirplaneData[3] = weightTextField.getText();
-                Airplane newAirplane = makeAirplane(newAirplaneData);
+                Airplane newAirplane = new Airplane(
+                        modelNameTextField.getText(),
+                        seatCapacityTextField.getText(),
+                        nextInspectionDateTextField.getText(),
+                        weightTextField.getText()
+                );
                 airplaneList.add(newAirplane);
 
-                try (FileWriter fileWriter = new FileWriter("data.csv", true);
-                     BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                     PrintWriter printWriter = new PrintWriter(bufferedWriter)) {
-                    printWriter.println(newAirplaneData[0] + ","
-                            + newAirplaneData[1] + ","
-                            + newAirplaneData[2] + ","
-                            + newAirplaneData[3]);
+                try (PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter("data.csv", true)))) {
+                    printWriter.println(new AirplaneCsvSerializer(newAirplane).serialize());
                     printWriter.flush();
                     printWriter.close();
                 } catch (IOException e) {
@@ -99,21 +94,13 @@ public class AirplaneIS {
         for (Object dataLine : dataLines) {
             String line = dataLine.toString();
             String[] airplaneRow = line.split(",");
-            Airplane airplane = makeAirplane(airplaneRow);
+            Airplane airplane = new Airplane(airplaneRow);
             airplaneList.add(airplane);
         }
         for (int i = 0; i < airplaneList.size(); i++) {
             Object[] airplaneRowData = getAirplaneData(i);
             tableModel.addRow(airplaneRowData);
         }
-    }
-
-    private Airplane makeAirplane(String[] airplaneRow) {
-        String modelName = airplaneRow[0];
-        int seatCapacity = Integer.parseInt(airplaneRow[1]);
-        String nextInspectionDate = airplaneRow[2];
-        int weight = Integer.parseInt(airplaneRow[3]);
-        return new Airplane(modelName, seatCapacity, nextInspectionDate, weight);
     }
 
     private Object[] getAirplaneData(int index) {
