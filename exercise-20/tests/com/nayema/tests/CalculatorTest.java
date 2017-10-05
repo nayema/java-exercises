@@ -1,8 +1,6 @@
 package com.nayema.tests;
 
 import com.nayema.Calculator;
-import org.junit.Ignore;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 
@@ -11,7 +9,7 @@ import static org.hamcrest.Matchers.*;
 
 class CalculatorTest {
     @Test
-    void itMultipliesTwoNumbers() {
+    public void itMultipliesTwoNumbers() {
         Calculator calculator = new Calculator();
 
         double product = calculator.multiply(2, 3);
@@ -20,7 +18,7 @@ class CalculatorTest {
     }
 
     @Test
-    void itDividesTwoNumbers() {
+    public void itDividesTwoNumbers() {
         Calculator calculator = new Calculator();
 
         double dividedAnswer = calculator.divide(6, 3);
@@ -29,7 +27,7 @@ class CalculatorTest {
     }
 
     @Test
-    void itExponentiatesBaseNumberWithExponentNumber() {
+    public void itExponentiatesBaseNumberWithExponentNumber() {
         Calculator calculator = new Calculator();
 
         double exponentiatedNumber = calculator.exponentiate(6, 3);
