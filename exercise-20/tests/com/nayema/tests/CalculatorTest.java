@@ -8,6 +8,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 class CalculatorTest {
+
     @Test
     public void itMultipliesTwoNumbers() {
         Calculator calculator = new Calculator();
@@ -21,9 +22,9 @@ class CalculatorTest {
     public void itDividesTwoNumbers() {
         Calculator calculator = new Calculator();
 
-        double dividedAnswer = calculator.divide(6, 3);
+        double quotient = calculator.divide(6, 3);
 
-        assertThat(dividedAnswer, is(equalTo(2.0)));
+        assertThat(quotient, is(equalTo(2.0)));
     }
 
     @Test
