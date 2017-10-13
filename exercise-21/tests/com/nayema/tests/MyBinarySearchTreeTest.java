@@ -1,5 +1,6 @@
 package com.nayema.tests;
 
+import com.nayema.EmptyListException;
 import com.nayema.MyBinarySearchTree;
 import org.junit.jupiter.api.Test;
 
@@ -7,6 +8,8 @@ import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class MyBinarySearchTreeTest {
 
@@ -64,5 +67,12 @@ public class MyBinarySearchTreeTest {
 
         ArrayList<String> list = bst.getInorderStringList();
         assertThat(list, contains("Cat", "Dog", "Rabbit"));
+    }
+
+    @Test
+    public void itThrowsExceptionIfListIsEmpty() {
+        MyBinarySearchTree<String> bst = new MyBinarySearchTree<>();
+
+        assertThrows(EmptyListException.class, () -> bst.retrieve(1));
     }
 }
