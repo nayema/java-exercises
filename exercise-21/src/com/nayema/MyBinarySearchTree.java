@@ -9,10 +9,10 @@ public class MyBinarySearchTree<E> {
         if (root == null) {
             root = new MyBinarySearchTreeNode<>(key, value);
         }
-//        if (key < currentNode.key) {
-//            if (currentNode.leftChild == null) {
-//                currentNode.leftChild = new MyBinarySearchTreeNode<>(key, value);
-//            } else {
+        if (key < root.key) {
+            if (root.leftChild == null) {
+                root.leftChild = new MyBinarySearchTreeNode<>(key, value);
+            } //else {
 //                insert(key, value);
 //            }
 //        } else if (key > currentNode.key) {
@@ -21,13 +21,11 @@ public class MyBinarySearchTree<E> {
 //            } else {
 //                insert(key, value);
 //            }
-//        }
+        }
     }
 
     public ArrayList<E> getInorderStringList() {
-        ArrayList<E> list = new ArrayList<>();
-        list.add(root.value);
-        return list;
+        return getInorder(root);
 //        ArrayList<E> list = new ArrayList<>();
 //        MyBinarySearchTreeNode<E> currentNode = root;
 //        if (currentNode != null) {
@@ -38,11 +36,13 @@ public class MyBinarySearchTree<E> {
 //        return list;
     }
 
-    private void getInorder(MyBinarySearchTreeNode<E> root) {
-        if (root != null) {
-            getInorder(root.leftChild);
-            System.out.println(root.key + "," + root.value);
-            getInorder(root.rightChild);
+    private ArrayList<E> getInorder(MyBinarySearchTreeNode<E> node) {
+        ArrayList<E> list = new ArrayList<>();
+        if (node != null) {
+            list.addAll(getInorder(node.leftChild));
+            list.add(node.value);
+            list.addAll(getInorder(node.rightChild));
         }
+        return list;
     }
 }

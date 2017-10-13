@@ -19,4 +19,15 @@ public class MyBinarySearchTreeTest {
         ArrayList<String> list = bst.getInorderStringList();
         assertThat(list, contains("Cat"));
     }
+
+    @Test
+    public void itInsertsSecondValueAsLeftChild() {
+        MyBinarySearchTree<String> bst = new MyBinarySearchTree<>();
+        bst.insert(2, "Cat");
+
+        bst.insert(1, "Dog");
+
+        ArrayList<String> list = bst.getInorderStringList();
+        assertThat(list, contains("Dog", "Cat"));
+    }
 }
