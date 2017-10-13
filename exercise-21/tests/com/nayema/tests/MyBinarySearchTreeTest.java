@@ -96,4 +96,15 @@ public class MyBinarySearchTreeTest {
 
         assertThat(value, is(equalTo("Dog")));
     }
+
+    @Test
+    public void itRetrievesValueFromRightChildBecauseKeyIsLarger() throws EmptyListException {
+        MyBinarySearchTree<String> bst = new MyBinarySearchTree<>();
+        bst.insert(1, "Cat");
+        bst.insert(2, "Dog");
+
+        String value = bst.retrieve(2);
+
+        assertThat(value, is(equalTo("Dog")));
+    }
 }
