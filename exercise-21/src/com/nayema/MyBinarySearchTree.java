@@ -6,7 +6,7 @@ public class MyBinarySearchTree<E> {
     MyBinarySearchTreeNode<E> root;
 
     public ArrayList<E> getInorderStringList() {
-        return getInorder(root);
+        return getInorderStringList(root);
     }
 
     public void insert(int key, E value) {
@@ -31,16 +31,16 @@ public class MyBinarySearchTree<E> {
     }
 
     private boolean isLeaf(MyBinarySearchTreeNode node, int key) {
-        retrieve(node, key);
-        return !node.hasRightChild() || !node.hasLeftChild();
+        MyBinarySearchTreeNode currentNode = retrieveNode(node, key);
+        return (!currentNode.hasLeftChild()) && (!currentNode.hasLeftChild());
     }
 
-    private ArrayList<E> getInorder(MyBinarySearchTreeNode<E> node) {
+    private ArrayList<E> getInorderStringList(MyBinarySearchTreeNode<E> node) {
         ArrayList<E> list = new ArrayList<>();
         if (node != null) {
-            list.addAll(getInorder(node.leftChild));
+            list.addAll(getInorderStringList(node.leftChild));
             list.add(node.value);
-            list.addAll(getInorder(node.rightChild));
+            list.addAll(getInorderStringList(node.rightChild));
         }
         return list;
     }
@@ -68,6 +68,17 @@ public class MyBinarySearchTree<E> {
             return retrieve(node.leftChild, key);
         } else if (key > node.key) {
             return retrieve(node.rightChild, key);
+        }
+        return null;
+    }
+
+    private MyBinarySearchTreeNode retrieveNode(MyBinarySearchTreeNode node, int key) {
+        if (key == node.key) {
+            return node;
+        } else if (key < node.key) {
+            return retrieveNode(node.leftChild, key);
+        } else if (key > node.key) {
+            return retrieveNode(node.rightChild, key);
         }
         return null;
     }

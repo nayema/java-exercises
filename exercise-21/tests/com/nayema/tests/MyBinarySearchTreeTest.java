@@ -142,4 +142,16 @@ public class MyBinarySearchTreeTest {
 
         assertThat(isLeafNode, is(equalTo(true)));
     }
+
+    @Test
+    public void itReturnsFalseIfGivenParentNode() {
+        MyBinarySearchTree<String> bst = new MyBinarySearchTree<>();
+        bst.insert(3, "Cat");
+        bst.insert(2, "Dog");
+        bst.insert(4, "Rabbit");
+
+        boolean isLeafNode = bst.isLeaf(3);
+
+        assertThat(isLeafNode, is(equalTo(false)));
+    }
 }
