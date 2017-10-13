@@ -26,6 +26,15 @@ public class MyBinarySearchTree<E> {
         }
     }
 
+    public boolean isLeaf(int key) {
+        return isLeaf(root, key);
+    }
+
+    private boolean isLeaf(MyBinarySearchTreeNode node, int key) {
+        retrieve(node, key);
+        return !node.hasRightChild() || !node.hasLeftChild();
+    }
+
     private ArrayList<E> getInorder(MyBinarySearchTreeNode<E> node) {
         ArrayList<E> list = new ArrayList<>();
         if (node != null) {

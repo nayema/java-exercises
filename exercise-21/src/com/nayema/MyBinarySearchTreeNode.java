@@ -18,8 +18,4 @@ public class MyBinarySearchTreeNode<E> {
     public boolean hasLeftChild() {
         return leftChild != null;
     }
-
-    public boolean isEmpty() {
-        return (key == -1) && (value == null) && (rightChild == null) && (leftChild == null);
-    }
 }
