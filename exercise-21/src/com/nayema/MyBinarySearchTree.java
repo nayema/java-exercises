@@ -8,20 +8,27 @@ public class MyBinarySearchTree<E> {
     public void insert(int key, E value) {
         if (root == null) {
             root = new MyBinarySearchTreeNode<>(key, value);
-        }
-        if (key < root.key) {
-            if (root.leftChild == null) {
-                root.leftChild = new MyBinarySearchTreeNode<>(key, value);
-            }
-        } else if (key > root.key) {
-            if (root.rightChild == null) {
-                root.rightChild = new MyBinarySearchTreeNode<>(key, value);
-            }
+        } else {
+            insert(new MyBinarySearchTreeNode<>(key, value), root);
         }
     }
 
     public ArrayList<E> getInorderStringList() {
         return getInorder(root);
+    }
+
+    private void insert(MyBinarySearchTreeNode<E> newNode, MyBinarySearchTreeNode<E> subTreeNode) {
+        if (newNode.key < subTreeNode.key) {
+            if (subTreeNode.leftChild == null) {
+                subTreeNode.leftChild = newNode;
+            } else {
+                insert(newNode, subTreeNode.leftChild);
+            }
+        } else if (newNode.key > subTreeNode.key) {
+            if (subTreeNode.rightChild == null) {
+                subTreeNode.rightChild = newNode;
+            }
+        }
     }
 
     private ArrayList<E> getInorder(MyBinarySearchTreeNode<E> node) {

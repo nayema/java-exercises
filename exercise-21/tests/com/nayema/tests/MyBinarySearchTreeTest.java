@@ -41,4 +41,16 @@ public class MyBinarySearchTreeTest {
         ArrayList<String> list = bst.getInorderStringList();
         assertThat(list, contains("Cat", "Dog"));
     }
+
+    @Test
+    public void itInsertsThirdValueAsLeftOfLeftChild() {
+        MyBinarySearchTree<String> bst = new MyBinarySearchTree<>();
+        bst.insert(3, "Cat");
+        bst.insert(2, "Dog");
+
+        bst.insert(1, "Rabbit");
+
+        ArrayList<String> list = bst.getInorderStringList();
+        assertThat(list, contains("Rabbit", "Dog", "Cat"));
+    }
 }
