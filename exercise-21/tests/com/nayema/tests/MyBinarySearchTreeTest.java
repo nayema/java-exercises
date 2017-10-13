@@ -30,4 +30,15 @@ public class MyBinarySearchTreeTest {
         ArrayList<String> list = bst.getInorderStringList();
         assertThat(list, contains("Dog", "Cat"));
     }
+
+    @Test
+    public void itInsertsSecondValueAsRightChildBecauseKeyIsLarger() {
+        MyBinarySearchTree<String> bst = new MyBinarySearchTree<>();
+        bst.insert(2, "Cat");
+
+        bst.insert(3, "Dog");
+
+        ArrayList<String> list = bst.getInorderStringList();
+        assertThat(list, contains("Cat", "Dog"));
+    }
 }

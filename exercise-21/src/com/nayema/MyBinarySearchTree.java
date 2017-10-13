@@ -12,7 +12,11 @@ public class MyBinarySearchTree<E> {
         if (key < root.key) {
             if (root.leftChild == null) {
                 root.leftChild = new MyBinarySearchTreeNode<>(key, value);
-            } 
+            }
+        } else if (key > root.key) {
+            if (root.rightChild == null) {
+                root.rightChild = new MyBinarySearchTreeNode<>(key, value);
+            }
         }
     }
 
