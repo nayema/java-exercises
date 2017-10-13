@@ -75,4 +75,14 @@ public class MyBinarySearchTreeTest {
 
         assertThrows(EmptyListException.class, () -> bst.retrieve(1));
     }
+
+    @Test
+    public void itRetrievesValueAtRoot() throws EmptyListException {
+        MyBinarySearchTree<String> bst = new MyBinarySearchTree<>();
+        bst.insert(1, "Cat");
+
+        String value = bst.retrieve(1);
+
+        assertThat(value, is(equalTo("Cat")));
+    }
 }

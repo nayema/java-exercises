@@ -18,11 +18,12 @@ public class MyBinarySearchTree<E> {
         }
     }
 
-    public String retrieve(int key) throws EmptyListException {
+    public E retrieve(int key) throws EmptyListException {
         if (root == null) {
             throw new EmptyListException("Tree is Empty");
+        } else {
+            return retrieve(root, key);
         }
-        return null;
     }
 
     private ArrayList<E> getInorder(MyBinarySearchTreeNode<E> node) {
@@ -51,4 +52,11 @@ public class MyBinarySearchTree<E> {
         }
     }
 
+    private E retrieve(MyBinarySearchTreeNode node, int key) {
+        if (key == node.key) {
+            return (E) node.value;
+        } else {
+            return null;
+        }
+    }
 }
