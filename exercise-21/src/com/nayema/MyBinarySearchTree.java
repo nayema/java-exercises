@@ -3,7 +3,7 @@ package com.nayema;
 import java.util.ArrayList;
 
 public class MyBinarySearchTree<E> {
-    MyBinarySearchTreeNode<E> root;
+    MyBinarySearchTreeNode root;
 
     public ArrayList<E> getInorderStringList() {
         return getInorderStringList(root);
