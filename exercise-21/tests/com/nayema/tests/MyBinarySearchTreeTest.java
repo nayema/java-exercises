@@ -21,7 +21,7 @@ public class MyBinarySearchTreeTest {
     }
 
     @Test
-    public void itInsertsSecondValueAsLeftChild() {
+    public void itInsertsSecondValueAsLeftChildBecauseKeyIsSmaller() {
         MyBinarySearchTree<String> bst = new MyBinarySearchTree<>();
         bst.insert(2, "Cat");
 

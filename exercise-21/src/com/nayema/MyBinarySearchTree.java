@@ -12,28 +12,12 @@ public class MyBinarySearchTree<E> {
         if (key < root.key) {
             if (root.leftChild == null) {
                 root.leftChild = new MyBinarySearchTreeNode<>(key, value);
-            } //else {
-//                insert(key, value);
-//            }
-//        } else if (key > currentNode.key) {
-//            if (currentNode.rightChild == null) {
-//                currentNode.rightChild = new MyBinarySearchTreeNode<>(key, value);
-//            } else {
-//                insert(key, value);
-//            }
+            } 
         }
     }
 
     public ArrayList<E> getInorderStringList() {
         return getInorder(root);
-//        ArrayList<E> list = new ArrayList<>();
-//        MyBinarySearchTreeNode<E> currentNode = root;
-//        if (currentNode != null) {
-//            getInorder(currentNode.leftChild);
-//            list.add(currentNode.value);
-//            getInorder(currentNode.rightChild);
-//        }
-//        return list;
     }
 
     private ArrayList<E> getInorder(MyBinarySearchTreeNode<E> node) {
