@@ -55,6 +55,8 @@ public class MyBinarySearchTree<E> {
     private E retrieve(MyBinarySearchTreeNode node, int key) {
         if (key == node.key) {
             return (E) node.value;
+        } else if (key < node.key){
+            return retrieve(node.leftChild, key);
         } else {
             return null;
         }
