@@ -6,10 +6,11 @@ public class MyBinarySearchTree<E> {
     MyBinarySearchTreeNode<E> root;
 
     public void insert(int key, E value) {
+        MyBinarySearchTreeNode<E> newNode = new MyBinarySearchTreeNode<>(key, value);
         if (root == null) {
-            root = new MyBinarySearchTreeNode<>(key, value);
+            root = newNode;
         } else {
-            insert(new MyBinarySearchTreeNode<>(key, value), root);
+            insert(newNode, root);
         }
     }
 
@@ -27,6 +28,8 @@ public class MyBinarySearchTree<E> {
         } else if (newNode.key > subTreeNode.key) {
             if (subTreeNode.rightChild == null) {
                 subTreeNode.rightChild = newNode;
+            } else {
+                insert(newNode, subTreeNode.rightChild);
             }
         }
     }
