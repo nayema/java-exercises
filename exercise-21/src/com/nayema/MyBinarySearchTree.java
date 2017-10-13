@@ -30,11 +30,6 @@ public class MyBinarySearchTree<E> {
         return isLeaf(root, key);
     }
 
-    private boolean isLeaf(MyBinarySearchTreeNode node, int key) {
-        MyBinarySearchTreeNode currentNode = retrieveNode(node, key);
-        return (!currentNode.hasLeftChild()) && (!currentNode.hasLeftChild());
-    }
-
     private ArrayList<E> getInorderStringList(MyBinarySearchTreeNode<E> node) {
         ArrayList<E> list = new ArrayList<>();
         if (node != null) {
@@ -81,5 +76,10 @@ public class MyBinarySearchTree<E> {
             return retrieveNode(node.rightChild, key);
         }
         return null;
+    }
+
+    private boolean isLeaf(MyBinarySearchTreeNode node, int key) {
+        MyBinarySearchTreeNode currentNode = retrieveNode(node, key);
+        return (!currentNode.hasLeftChild()) && (!currentNode.hasLeftChild());
     }
 }
