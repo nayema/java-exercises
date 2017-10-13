@@ -69,7 +69,7 @@ public class MyBinarySearchTree<E> {
 
     private boolean isLeaf(MyBinarySearchTreeNode node, int key) {
         MyBinarySearchTreeNode currentNode = retrieveNode(node, key);
-        return (!currentNode.hasLeftChild()) && (!currentNode.hasLeftChild());
+        return (!currentNode.hasLeftChild()) && (!currentNode.hasRightChild());
     }
 
     private MyBinarySearchTreeNode retrieveNode(MyBinarySearchTreeNode node, int key) {
