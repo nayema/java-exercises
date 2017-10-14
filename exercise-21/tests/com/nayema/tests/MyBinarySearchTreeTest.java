@@ -1,6 +1,7 @@
 package com.nayema.tests;
 
 import com.nayema.EmptyListException;
+import com.nayema.KeyNotFoundException;
 import com.nayema.MyBinarySearchTree;
 import org.junit.jupiter.api.Test;
 
@@ -133,7 +134,7 @@ public class MyBinarySearchTreeTest {
     }
 
     @Test
-    public void itReturnsTrueIfGivenLeafNode() {
+    public void itReturnsTrueIfGivenLeafNode() throws KeyNotFoundException {
         MyBinarySearchTree<String> bst = new MyBinarySearchTree<>();
         bst.insert(1, "Cat");
         bst.insert(2, "Dog");
@@ -144,7 +145,7 @@ public class MyBinarySearchTreeTest {
     }
 
     @Test
-    public void itReturnsFalseIfGivenParentNode() {
+    public void itReturnsFalseIfGivenParentNode() throws KeyNotFoundException {
         MyBinarySearchTree<String> bst = new MyBinarySearchTree<>();
         bst.insert(3, "Cat");
         bst.insert(2, "Dog");
@@ -153,5 +154,13 @@ public class MyBinarySearchTreeTest {
         boolean isLeafNode = bst.isLeaf(3);
 
         assertThat(isLeafNode, is(equalTo(false)));
+    }
+
+    @Test
+    public void itThrowsKeyNotFoundExceptionIfKeyDoesNotExistInTree() {
+        MyBinarySearchTree<String> bst = new MyBinarySearchTree<>();
+        bst.insert(1, "not going to look for this");
+
+        assertThrows(KeyNotFoundException.class, () -> bst.isLeaf(555));
     }
 }

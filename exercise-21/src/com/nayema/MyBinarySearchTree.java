@@ -3,7 +3,7 @@ package com.nayema;
 import java.util.ArrayList;
 
 public class MyBinarySearchTree<E> {
-    MyBinarySearchTreeNode<E> root;
+    private MyBinarySearchTreeNode<E> root;
 
     public ArrayList<E> getInorderStringList() {
         return getInorderStringListRecursively(root);
@@ -26,9 +26,12 @@ public class MyBinarySearchTree<E> {
         }
     }
 
-    public boolean isLeaf(int key) {
-        MyBinarySearchTreeNode<E> currentNode = retrieveNodeRecursively(root, key);
-        return (!currentNode.hasLeftChild()) && (!currentNode.hasRightChild());
+    public boolean isLeaf(int key) throws KeyNotFoundException {
+        MyBinarySearchTreeNode<E> retrievedNode = retrieveNodeRecursively(root, key);
+        if (retrievedNode == null) {
+            throw new KeyNotFoundException(key + " does not exist.");
+        }
+        return (!retrievedNode.hasLeftChild()) && (!retrievedNode.hasRightChild());
     }
 
     private ArrayList<E> getInorderStringListRecursively(MyBinarySearchTreeNode<E> node) {
@@ -58,7 +61,9 @@ public class MyBinarySearchTree<E> {
     }
 
     private MyBinarySearchTreeNode<E> retrieveNodeRecursively(MyBinarySearchTreeNode<E> node, int key) {
-        if (key == node.key) {
+        if (node == null) {
+            return null;
+        } else if (key == node.key) {
             return node;
         } else if (key < node.key) {
             return retrieveNodeRecursively(node.leftChild, key);
@@ -67,5 +72,4 @@ public class MyBinarySearchTree<E> {
         }
         return null;
     }
-
 }
