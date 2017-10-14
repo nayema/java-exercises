@@ -3,8 +3,8 @@ package com.nayema;
 public class MyBinarySearchTreeNode<E> {
     public E value;
     public int key = 0;
-    public MyBinarySearchTreeNode leftChild;
-    public MyBinarySearchTreeNode rightChild;
+    public MyBinarySearchTreeNode<E> leftChild;
+    public MyBinarySearchTreeNode<E> rightChild;
 
     public MyBinarySearchTreeNode(int key, E value) {
         this.value = value;
