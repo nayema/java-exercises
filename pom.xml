@@ -10,6 +10,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.jupiter.version>5.0.1</junit.jupiter.version>
         <junit.platform.version>1.0.1</junit.platform.version>
+        <hamcrest-junit.version>2.0.0.0</hamcrest-junit.version>
     </properties>
     <build>
         <plugins>
@@ -48,8 +49,8 @@
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-junit</artifactId>
-            <version>2.0.0.0</version>
-            <scope>compile</scope>
+            <version>${hamcrest-junit.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
