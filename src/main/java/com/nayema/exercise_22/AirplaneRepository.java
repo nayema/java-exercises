@@ -35,6 +35,7 @@ public class AirplaneRepository {
         int seatCapacity = results.getInt("seat_capacity");
         String nextInspectionDate = results.getString("next_inspection_date");
         int weight = results.getInt("weight");
+        preparedStatement.close();
 
         return new Airplane(modelName, seatCapacity, nextInspectionDate, weight);
     }
