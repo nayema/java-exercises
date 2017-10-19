@@ -3,6 +3,8 @@ package com.nayema.exercise_22;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -18,16 +20,43 @@ public class AirplaneIS {
     private JTextField modelNameTextField;
     private JTextField seatCapacityTextField;
     private JTextField nextInspectionDateTextField;
-    private JTextField weightLbsTextField;
+    private JTextField weightTextField;
     private JLabel modelNameLabel;
     private JLabel seatCapacityLabel;
     private JLabel inspectionDateLabel;
     private JLabel weightLabel;
+    private JPanel queryPanel;
+    private JTextField queryModelNameTextField;
+    private JLabel queryModelNameLabel;
     private JButton queryButton;
     private AirplaneRepository repository;
 
     public AirplaneIS() throws SQLException {
         repository = new AirplaneRepository();
+        insertButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Airplane airplane = new Airplane(
+                        modelNameTextField.getText(),
+                        seatCapacityTextField.getText(),
+                        nextInspectionDateTextField.getText(),
+                        weightTextField.getText()
+                );
+                try {
+                    repository.insert(airplane);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+                clearTextFields();
+            }
+
+            private void clearTextFields() {
+                modelNameTextField.setText(null);
+                seatCapacityTextField.setText(null);
+                nextInspectionDateTextField.setText("DD-MMM-YYYY");
+                weightTextField.setText(null);
+            }
+        });
     }
 
     public static void main(String[] args) throws IOException, SQLException {
