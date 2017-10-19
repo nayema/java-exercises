@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class AirplaneIS {
     private JFrame frame;
@@ -23,10 +24,10 @@ public class AirplaneIS {
     private JLabel inspectionDateLabel;
     private JLabel weightLabel;
     private JButton queryButton;
-    private SqlHelper sqlHelper;
+    private AirplaneRepository repository;
 
     public AirplaneIS() throws SQLException {
-        sqlHelper = new SqlHelper("jdbc:sqlite:/Users/Nayema/Development/java-exercises/nayema.sqlite.airplane");
+        repository = new AirplaneRepository();
     }
 
     public static void main(String[] args) throws IOException, SQLException {
@@ -39,25 +40,23 @@ public class AirplaneIS {
     }
 
     private void populateTable() throws SQLException {
-        ResultSetMetaData resultSetMetaData = sqlHelper.queryResultSetMetaData();
-        int columnCount = resultSetMetaData.getColumnCount();
-
         DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
-        tableModel.setColumnCount(0);
-        for (int i = 1; i < columnCount; i++) {
-            tableModel.addColumn(resultSetMetaData.getColumnName(i));
-        }
-        tableModel.setRowCount(0);
-        ResultSet resultSet = sqlHelper.getResultSet();
+        String[] columnNames = {"ID", "Model Name", "Seat Capacity", "Next Inspection Date", "Weight (lbs)"};
+        tableModel.setColumnIdentifiers(columnNames);
+
+        Statement statement = repository.getConnection().createStatement();
+        String query = "SELECT * FROM airplane_data";
+        ResultSet resultSet = statement.executeQuery(query);
+        ResultSetMetaData rsmd = resultSet.getMetaData();
+        int columnCount = rsmd.getColumnCount();
         while (resultSet.next()) {
-            String[] record = new String[columnCount];
+            Object[] objects = new Object[columnCount];
             for (int i = 0; i < columnCount; i++) {
-                record[i] = resultSet.getString(i + 1);
+                objects[i] = resultSet.getObject(i + 1);
             }
-            tableModel.addRow(record);
+            tableModel.addRow(objects);
         }
-        tableModel.fireTableDataChanged();
-        resultSet.close();
+        table1.setModel(tableModel);
     }
 
     private void renderUI() {
