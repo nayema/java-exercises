@@ -15,6 +15,10 @@ hs_err_pid*
 *.iml
 .DS_Store
 /target/
-db/*.sqlite
 
-nayema.sqlite.airplan
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
