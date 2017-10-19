@@ -2,50 +2,40 @@ package com.nayema.exercise_22;
 
 import java.sql.*;
 
-public class SqlHelper {
+public class AirplaneRepository {
     private Connection connection;
-    private ResultSet resultSet;
 
-    public ResultSet getResultSet() {
-        return resultSet;
+    public Connection getConnection() {
+        return connection;
     }
 
-    public SqlHelper(String url) throws SQLException {
-        connection = DriverManager.getConnection(url);
+    public AirplaneRepository() throws SQLException {
+        connection = DriverManager.getConnection("jdbc:sqlite:/Users/Nayema/Development/java-exercises/nayema.sqlite.airplane");
     }
 
-    public void insertRecord(String modelName, int seatCapacity, String nextInspectionDate, int weight) throws SQLException {
-        String sql = "INSERT INTO airplane_data(model_name, seat_capacity, next_inspection_date, weight) VALUES (?, ?, ?, ?)";
-        insertNewAirplaneRecord(modelName, seatCapacity, nextInspectionDate, weight, sql);
-    }
-
-    public void queryData(String modelNameQuery) throws SQLException {
-        String sql = "SELECT * FROM airplane_data WHERE model_name = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, modelNameQuery);
-        preparedStatement.executeQuery();
-    }
-
-    public ResultSetMetaData queryResultSetMetaData() throws SQLException {
-        String sql = "SELECT * FROM airplane_data";
-        return getMetaData(sql);
-
-    }
-
-    private void insertNewAirplaneRecord(String modelName, int seatCapacity, String nextInspectionDate, int weight, String sql) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, modelName);
-        preparedStatement.setInt(2, seatCapacity);
-        preparedStatement.setString(3, nextInspectionDate);
-        preparedStatement.setInt(4, weight);
+    public void insert(Airplane airplane) throws SQLException {
+        String query = "INSERT INTO airplane_data(model_name, seat_capacity, next_inspection_date, weight) " +
+                "VALUES (?,?,?,?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, airplane.modelName);
+        preparedStatement.setInt(2, airplane.seatCapacity);
+        preparedStatement.setString(3, airplane.nextInspectionDate);
+        preparedStatement.setInt(4, airplane.weight);
         preparedStatement.executeUpdate();
         preparedStatement.close();
     }
 
-    private ResultSetMetaData getMetaData(String sql) throws SQLException {
-        Statement statement = connection.createStatement();
-        resultSet = statement.executeQuery(sql);
-        return resultSet.getMetaData();
-    }
+    public Airplane retrieve(String queryModelName) throws SQLException {
+        String query = "SELECT * FROM airplane_data WHERE model_name = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, queryModelName);
 
+        ResultSet results = preparedStatement.executeQuery();
+        String modelName = results.getString("model_name");
+        int seatCapacity = results.getInt("seat_capacity");
+        String nextInspectionDate = results.getString("next_inspection_date");
+        int weight = results.getInt("weight");
+
+        return new Airplane(modelName, seatCapacity, nextInspectionDate, weight);
+    }
 }
