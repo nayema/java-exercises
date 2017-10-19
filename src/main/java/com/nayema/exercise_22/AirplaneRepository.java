@@ -21,7 +21,9 @@ public class SqlHelper {
 
     public void queryData(String modelNameQuery) throws SQLException {
         String sql = "SELECT * FROM airplane_data WHERE model_name = ?";
-        queryByModelName(modelNameQuery, sql);
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, modelNameQuery);
+        preparedStatement.executeQuery();
     }
 
     public ResultSetMetaData queryResultSetMetaData() throws SQLException {
@@ -46,9 +48,4 @@ public class SqlHelper {
         return resultSet.getMetaData();
     }
 
-    private void queryByModelName(String modelNameQuery, String sql) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, modelNameQuery);
-        preparedStatement.executeQuery();
-    }
 }
