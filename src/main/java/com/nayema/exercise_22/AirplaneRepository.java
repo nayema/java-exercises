@@ -41,9 +41,7 @@ public class AirplaneRepository {
     }
 
     private void connect() throws SQLException {
-        String url = "jdbc:sqlite:src/main/resources/exercise-22.sqlite";
-        connection = DriverManager.getConnection(url);
+        connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/exercise-22.sqlite");
         connection.close();
     }
-
 }
