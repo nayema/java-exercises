@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class AirplaneIS {
     private JFrame frame;
@@ -29,32 +30,33 @@ public class AirplaneIS {
     private JTextField queryModelNameTextField;
     private JLabel queryModelNameLabel;
     private JButton queryButton;
+    DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
     private AirplaneRepository repository;
+    private ArrayList<Airplane> airplaneList = new ArrayList<>();
 
     public AirplaneIS() throws SQLException {
         repository = new AirplaneRepository();
         insertButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Airplane airplane = new Airplane(
+                Airplane newAirplane = new Airplane(
                         modelNameTextField.getText(),
                         seatCapacityTextField.getText(),
                         nextInspectionDateTextField.getText(),
                         weightTextField.getText()
                 );
+                airplaneList.add(newAirplane);
                 try {
-                    repository.insert(airplane);
+                    repository.insert(newAirplane);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+                try {
+                    updateTable();
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
                 clearTextFields();
-            }
-
-            private void clearTextFields() {
-                modelNameTextField.setText(null);
-                seatCapacityTextField.setText(null);
-                nextInspectionDateTextField.setText("DD-MMM-YYYY");
-                weightTextField.setText(null);
             }
         });
     }
@@ -69,7 +71,6 @@ public class AirplaneIS {
     }
 
     private void populateTable() throws SQLException {
-        DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
         String[] columnNames = {"ID", "Model Name", "Seat Capacity", "Next Inspection Date", "Weight (lbs)"};
         tableModel.setColumnIdentifiers(columnNames);
 
@@ -96,5 +97,26 @@ public class AirplaneIS {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    private void updateTable() throws SQLException {
+        Object[] newAirplaneRecord = getAirplaneData(airplaneList.size() - 1);
+        tableModel.addRow(newAirplaneRecord);
+    }
+
+    private Object[] getAirplaneData(int index) {
+        return new Object[]{
+                airplaneList.get(index).getModelName(),
+                airplaneList.get(index).getSeatCapacity(),
+                airplaneList.get(index).getNextInspectionDate(),
+                airplaneList.get(index).getWeight()
+        };
+    }
+
+    private void clearTextFields() {
+        modelNameTextField.setText(null);
+        seatCapacityTextField.setText(null);
+        nextInspectionDateTextField.setText("DD-MMM-YYYY");
+        weightTextField.setText(null);
     }
 }
