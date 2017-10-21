@@ -10,7 +10,7 @@ public class AirplaneRepository {
     }
 
     public AirplaneRepository() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/exercise-22.sqlite");
+        connect();
     }
 
     public void insert(Airplane airplane) throws SQLException {
@@ -39,4 +39,11 @@ public class AirplaneRepository {
 
         return new Airplane(modelName, seatCapacity, nextInspectionDate, weight);
     }
+
+    private void connect() throws SQLException {
+        String url = "jdbc:sqlite:src/main/resources/exercise-22.sqlite";
+        connection = DriverManager.getConnection(url);
+        connection.close();
+    }
+
 }
