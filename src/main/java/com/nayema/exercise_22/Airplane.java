@@ -1,10 +1,10 @@
 package com.nayema.exercise_22;
 
 public class Airplane {
-    public String modelName;
-    public int seatCapacity;
-    public String nextInspectionDate;
-    public int weight;
+    private String modelName;
+    private int seatCapacity;
+    private String nextInspectionDate;
+    private int weight;
 
     public Airplane(String modelName, int seatCapacity, String nextInspectionDate, int weight) {
         this.modelName = modelName;
@@ -18,5 +18,21 @@ public class Airplane {
         this.seatCapacity = Integer.parseInt(seatCapacity);
         this.nextInspectionDate = nextInspectionDate;
         this.weight = Integer.parseInt(weight);
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public int getSeatCapacity() {
+        return seatCapacity;
+    }
+
+    public String getNextInspectionDate() {
+        return nextInspectionDate;
+    }
+
+    public int getWeight() {
+        return weight;
     }
 }
