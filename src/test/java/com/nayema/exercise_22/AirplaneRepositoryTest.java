@@ -6,7 +6,6 @@ import static org.hamcrest.Matchers.*;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 class AirplaneRepositoryTest {
-
     @Test
     public void itInsertsAnAirplane() throws SQLException {
         AirplaneRepository repository = new AirplaneRepository();
@@ -15,9 +14,9 @@ class AirplaneRepositoryTest {
         repository.insert(airplane);
 
         Airplane result = repository.retrieve("Some model name");
-        assertThat(result.modelName, is(equalTo("Some model name")));
-        assertThat(result.seatCapacity, is(equalTo(1)));
-        assertThat(result.nextInspectionDate, is(equalTo("01-JAN-1000")));
-        assertThat(result.weight, is(equalTo(100)));
+        assertThat(result.getModelName(), is(equalTo("Some model name")));
+        assertThat(result.getSeatCapacity(), is(equalTo(1)));
+        assertThat(result.getNextInspectionDate(), is(equalTo("01-JAN-1000")));
+        assertThat(result.getWeight(), is(equalTo(100)));
     }
 }

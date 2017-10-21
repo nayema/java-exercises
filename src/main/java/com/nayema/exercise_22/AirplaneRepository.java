@@ -10,23 +10,23 @@ public class AirplaneRepository {
     }
 
     public AirplaneRepository() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlite:/Users/Nayema/Development/java-exercises/nayema.sqlite.airplane");
+        connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/exercise-22.sqlite");
     }
 
     public void insert(Airplane airplane) throws SQLException {
-        String query = "INSERT INTO airplane_data(model_name, seat_capacity, next_inspection_date, weight) " +
+        String query = "INSERT INTO airplanes(model_name, seat_capacity, next_inspection_date, weight) " +
                 "VALUES (?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, airplane.modelName);
-        preparedStatement.setInt(2, airplane.seatCapacity);
-        preparedStatement.setString(3, airplane.nextInspectionDate);
-        preparedStatement.setInt(4, airplane.weight);
+        preparedStatement.setString(1, airplane.getModelName());
+        preparedStatement.setInt(2, airplane.getSeatCapacity());
+        preparedStatement.setString(3, airplane.getNextInspectionDate());
+        preparedStatement.setInt(4, airplane.getWeight());
         preparedStatement.executeUpdate();
         preparedStatement.close();
     }
 
     public Airplane retrieve(String queryModelName) throws SQLException {
-        String query = "SELECT * FROM airplane_data WHERE model_name = ?";
+        String query = "SELECT * FROM airplanes WHERE model_name = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, queryModelName);
 
