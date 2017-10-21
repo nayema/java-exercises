@@ -1,11 +1,20 @@
 package com.nayema.exercise_22;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 class AirplaneRepositoryTest {
+    @BeforeAll
+    public void itCreatesADatabaseIfItDoesNotExist() throws SQLException {
+        AirplaneRepository repository = new AirplaneRepository();
+    }
+
+    @AfterEach
+
     @Test
     public void itInsertsAnAirplane() throws SQLException {
         AirplaneRepository repository = new AirplaneRepository();

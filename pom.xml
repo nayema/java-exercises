@@ -12,6 +12,7 @@
         <junit.platform.version>1.0.1</junit.platform.version>
         <hamcrest-junit.version>2.0.0.0</hamcrest-junit.version>
         <sqlite-jdbc.version>3.20.1</sqlite-jdbc.version>
+        <maven-failsafe-plugin.version>2.13</maven-failsafe-plugin.version>
     </properties>
     <build>
         <plugins>
@@ -32,11 +33,22 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
