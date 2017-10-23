@@ -30,8 +30,9 @@ public class AirplaneIS {
     private JTextField queryModelNameTextField;
     private JLabel queryModelNameLabel;
     private JButton queryButton;
-    DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
+    private JButton refreshButton;
     private AirplaneRepository repository;
+    private DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
     private ArrayList<Airplane> airplaneList = new ArrayList<>();
 
     public AirplaneIS() throws SQLException {
@@ -45,9 +46,28 @@ public class AirplaneIS {
                         nextInspectionDateTextField.getText(),
                         weightTextField.getText()
                 );
-                airplaneList.add(newAirplane);
                 try {
                     repository.insert(newAirplane);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+                airplaneList.add(newAirplane);
+                try {
+                    updateTable();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+                clearTextFields();
+            }
+        });
+        queryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tableModel.setRowCount(0);
+                String modelName = queryModelNameTextField.getText();
+                try {
+                    Airplane airplane = repository.retrieve(modelName);
+                    airplaneList.add(airplane);
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
@@ -56,7 +76,17 @@ public class AirplaneIS {
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
-                clearTextFields();
+            }
+        });
+        refreshButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tableModel.setRowCount(0);
+                try {
+                    populateTable();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
     }
@@ -71,11 +101,11 @@ public class AirplaneIS {
     }
 
     private void populateTable() throws SQLException {
-        String[] columnNames = {"ID", "Model Name", "Seat Capacity", "Next Inspection Date", "Weight (lbs)"};
+        String[] columnNames = {"Model Name", "Seat Capacity", "Next Inspection Date", "Weight (lbs)"};
         tableModel.setColumnIdentifiers(columnNames);
 
         Statement statement = repository.getConnection().createStatement();
-        String query = "SELECT * FROM airplane_data";
+        String query = "SELECT model_name, seat_capacity, next_inspection_date, weight FROM airplanes";
         ResultSet resultSet = statement.executeQuery(query);
         ResultSetMetaData rsmd = resultSet.getMetaData();
         int columnCount = rsmd.getColumnCount();
