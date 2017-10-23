@@ -13,22 +13,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class AirplaneIS {
-    private JFrame frame;
     private JPanel mainPanel;
     private JTable table1;
-    private JPanel editorPanel;
     private JButton insertButton;
     private JTextField modelNameTextField;
     private JTextField seatCapacityTextField;
     private JTextField nextInspectionDateTextField;
     private JTextField weightTextField;
-    private JLabel modelNameLabel;
-    private JLabel seatCapacityLabel;
-    private JLabel inspectionDateLabel;
-    private JLabel weightLabel;
-    private JPanel queryPanel;
     private JTextField queryModelNameTextField;
-    private JLabel queryModelNameLabel;
     private JButton queryButton;
     private JButton refreshButton;
     private AirplaneRepository repository;
@@ -120,7 +112,7 @@ public class AirplaneIS {
     }
 
     private void renderUI() {
-        frame = new JFrame("Airplane Information System");
+        JFrame frame = new JFrame("Airplane Information System");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(800, 800));
