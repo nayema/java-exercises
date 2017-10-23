@@ -22,7 +22,7 @@ class AirplaneRepositoryTest {
 
     @BeforeAll
     public static void ensureThereIsATestDatabase() throws SQLException, IOException {
-        connection = DriverManager.getConnection("jdbc:sqlite:src/test/resources/exercise-22.test.sqlite");
+        connection = DriverManager.getConnection("jdbc:sqlite::memory:");
         String query = new String(Files.readAllBytes(Paths.get("src/main/resources/exercise-22.schema.sql")));
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.execute();
@@ -37,7 +37,7 @@ class AirplaneRepositoryTest {
 
     @Test
     public void itInsertsAnAirplane() throws SQLException {
-        AirplaneRepository repository = new AirplaneRepository("jdbc:sqlite:src/test/resources/exercise-22.test.sqlite");
+        AirplaneRepository repository = new AirplaneRepository(connection);
         Airplane airplane = new Airplane("Some model name", 1, "01-JAN-2000", 100);
 
         repository.insert(airplane);

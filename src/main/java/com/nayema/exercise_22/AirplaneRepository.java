@@ -10,11 +10,11 @@ public class AirplaneRepository {
     }
 
     public AirplaneRepository() throws SQLException {
-        this("jdbc:sqlite:src/main/resources/exercise-22.sqlite");
+        this(DriverManager.getConnection("jdbc:sqlite:src/main/resources/exercise-22.sqlite"));
     }
 
-    public AirplaneRepository(String jdbcUrl) throws SQLException {
-        connection = DriverManager.getConnection(jdbcUrl);
+    public AirplaneRepository(Connection connection) throws SQLException {
+        this.connection = connection;
     }
 
     public void insert(Airplane airplane) throws SQLException {
