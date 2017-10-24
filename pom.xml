@@ -33,14 +33,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <plugin>
-                <groupId>org.eluder.coveralls</groupId>
-                <artifactId>coveralls-maven-plugin</artifactId>
-                <version>${coveralls-maven-plugin.version}</version>
-                <configuration>
-                    <repoToken>hRM2CtiTHA0VBNOsw7VaA7yLwLmRAFsuO</repoToken>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
     <dependencies>
