@@ -1,11 +1,12 @@
 package com.nayema.exercise_20;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+@Tag("Unit")
 class CalculatorTest {
 
     @Test
