@@ -15,6 +15,7 @@
         <hamcrest-junit.version>2.0.0.0</hamcrest-junit.version>
         <sqlite-jdbc.version>3.20.1</sqlite-jdbc.version>
         <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
+        <postgresql.version>42.1.4</postgresql.version>
     </properties>
     <build>
         <plugins>
@@ -52,6 +53,12 @@
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
             <version>${sqlite-jdbc.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

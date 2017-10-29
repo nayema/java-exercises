@@ -22,7 +22,7 @@ class AirplaneRepositoryTest {
 
     @BeforeAll
     public static void ensureThereIsATestDatabase() throws SQLException, IOException {
-        connection = DriverManager.getConnection("jdbc:sqlite::memory:");
+        connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/exercise-22-test");
         String query = new String(Files.readAllBytes(Paths.get("src/main/resources/exercise-22.schema.sql")));
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.execute();

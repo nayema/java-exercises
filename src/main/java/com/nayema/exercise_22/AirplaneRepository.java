@@ -10,7 +10,7 @@ public class AirplaneRepository {
     }
 
     public AirplaneRepository() throws SQLException {
-        this(DriverManager.getConnection("jdbc:sqlite:src/main/resources/exercise-22.sqlite"));
+        this(DriverManager.getConnection("jdbc:postgresql://localhost:5432/exercise-22"));
     }
 
     public AirplaneRepository(Connection connection) throws SQLException {
@@ -35,12 +35,18 @@ public class AirplaneRepository {
         preparedStatement.setString(1, queryModelName);
 
         ResultSet results = preparedStatement.executeQuery();
-        String modelName = results.getString("model_name");
-        int seatCapacity = results.getInt("seat_capacity");
-        String nextInspectionDate = results.getString("next_inspection_date");
-        int weight = results.getInt("weight");
+
+        Airplane airplane = null;
+        if (results.next()) {
+            String modelName = results.getString("model_name");
+            int seatCapacity = results.getInt("seat_capacity");
+            String nextInspectionDate = results.getString("next_inspection_date");
+            int weight = results.getInt("weight");
+            airplane = new Airplane(modelName, seatCapacity, nextInspectionDate, weight);
+        }
+
         preparedStatement.close();
 
-        return new Airplane(modelName, seatCapacity, nextInspectionDate, weight);
+        return airplane;
     }
 }
