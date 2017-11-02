@@ -1,3 +1,7 @@
+CREATE SCHEMA IF NOT EXISTS "exercise-22";
+
+SET search_path TO "exercise-22";
+
 CREATE TABLE IF NOT EXISTS airplanes
 (
   id                   SERIAL PRIMARY KEY,

@@ -10,7 +10,7 @@ public class AirplaneRepository {
     }
 
     public AirplaneRepository() throws SQLException {
-        this(DriverManager.getConnection("jdbc:postgresql://localhost:5432/exercise-22"));
+        this(DriverManager.getConnection("jdbc:postgresql://localhost/java-exercises"));
     }
 
     public AirplaneRepository(Connection connection) throws SQLException {

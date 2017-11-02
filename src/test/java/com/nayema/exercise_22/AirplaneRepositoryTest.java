@@ -22,9 +22,11 @@ class AirplaneRepositoryTest {
 
     @BeforeAll
     public static void ensureThereIsATestDatabase() throws SQLException, IOException {
-        connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/exercise-22-test");
+        connection = DriverManager.getConnection("jdbc:postgresql://localhost/java-exercises-test");
         String query = new String(Files.readAllBytes(Paths.get("src/main/resources/exercise-22.schema.sql")));
         PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.execute();
+        preparedStatement = connection.prepareStatement("SET search_path TO \"exercise-22\";");
         preparedStatement.execute();
     }
 
