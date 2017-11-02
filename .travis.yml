@@ -3,5 +3,8 @@ language: java
 services:
   - postgresql
 
+addons:
+  postgresql: "9.4"
+
 before_script:
   - psql -c 'CREATE DATABASE "java-exercises-test";' -U postgres
