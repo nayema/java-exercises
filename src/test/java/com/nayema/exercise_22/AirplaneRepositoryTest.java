@@ -26,8 +26,6 @@ class AirplaneRepositoryTest {
         String query = new String(Files.readAllBytes(Paths.get("src/main/resources/exercise-22.schema.sql")));
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.execute();
-        preparedStatement = connection.prepareStatement("SET search_path TO \"exercise-22\";");
-        preparedStatement.execute();
     }
 
     @BeforeEach

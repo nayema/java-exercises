@@ -15,6 +15,8 @@ public class AirplaneRepository {
 
     public AirplaneRepository(Connection connection) throws SQLException {
         this.connection = connection;
+        PreparedStatement preparedStatement = connection.prepareStatement("SET search_path TO \"exercise-22\";");
+        preparedStatement.execute();
     }
 
     public void insert(Airplane airplane) throws SQLException {
