@@ -16,6 +16,8 @@
         <sqlite-jdbc.version>3.20.1</sqlite-jdbc.version>
         <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
         <postgresql.version>42.1.4</postgresql.version>
+        <jacoco-maven-plugin.version>0.7.9</jacoco-maven-plugin.version>
+        <codacy-coverage-reporter.version>2.0.1</codacy-coverage-reporter.version>
     </properties>
     <build>
         <plugins>
@@ -33,6 +35,31 @@
                         <version>${junit.platform.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -60,6 +87,12 @@
             <artifactId>postgresql</artifactId>
             <version>${postgresql.version}</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.codacy</groupId>
+            <artifactId>codacy-coverage-reporter</artifactId>
+            <version>${codacy-coverage-reporter.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
