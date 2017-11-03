@@ -44,6 +44,7 @@
                     <excludes>
                         <exclude>com/nayema/exercise_0?/**/*</exclude>
                         <exclude>com/nayema/exercise_1?/**/*</exclude>
+                        <exclude>com/nayema/menu_helper/**/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
