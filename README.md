@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/nayema/java-exercises.svg?branch=master)](https://travis-ci.org/nayema/java-exercises)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/538c73ebb0bf4134bc61af6413d837b8)](https://www.codacy.com/app/nayema/java-exercises?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nayema/java-exercises&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/538c73ebb0bf4134bc61af6413d837b8)](https://www.codacy.com/app/nayema/java-exercises?utm_source=github.com&utm_medium=referral&utm_content=nayema/java-exercises&utm_campaign=Badge_Coverage)
 
 # The Purpose of java-exercises repository
 
