@@ -6,12 +6,17 @@ services:
 addons:
   postgresql: "9.4"
 
-before_script:
-  - psql -c 'CREATE DATABASE "java-exercises-test";' -U postgres
-
 before_install:
   - sudo apt-get install jq
   - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
 
+# Travis: `mvn install`
+
+before_script:
+  - psql -c 'CREATE DATABASE "java-exercises-test";' -U postgres
+
+# Travis: `mvn test`
+
 after_success:
+  - mvn jacoco:report
   - java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter -l Java -r target/site/jacoco/jacoco.xml
