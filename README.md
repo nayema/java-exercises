@@ -21,7 +21,7 @@ This repository contains exercises I completed to practice the foundaitons of pr
 | exercise_12 | Distance between two 3D points                                                |       No      |
 | exercise_13 | Isosceles triangle                                                            |       No      |
 | exercise_14 | Inheritance                                                                   |       No      |
-| exercise_15 | Random actor generator through OOP                                            |       No      |
+| exercise_15 | Random actor generator using OOP                                              |       No      |
 | exercise_16 | Exceptions and Statistics                                                     |       No      |
 | exercise_17 | Strategy pattern and BubbleSort                                               |       No      |
 | exercise_18 | Finding coordinates                                                           |       No      |
